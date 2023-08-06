@@ -7,7 +7,7 @@ export default function HomePage() {
     <main className="container">
       <header>
         <img src="header_image.png" alt="Header" className="header-image" />
-        <h1 className="header-title">Welcome to the Ashish Store</h1>
+        <h1 className="header-title">Sritam's ATM</h1>
       </header>
       <div className="content">
         <div className="box">{initUser()}</div>
