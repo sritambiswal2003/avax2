@@ -1,66 +1,40 @@
-# Assessment Smart Contract
+## Assessment Smart Contract
 
-This repository contains a Solidity smart contract named "Assessment" that allows users to deposit and withdraw Ether. The contract is designed to manage a user's balance and provides basic functionality for financial transactions on the Ethereum blockchain.
+This is a simple Solidity smart contract named "Assessment" that allows users to deposit and withdraw funds from their account. The contract is designed to manage a user's balance and includes an event to emit deposit and withdraw transactions.
 
-## Contract Details
+### Contract Details
 
-- **SPDX-License-Identifier**: UNLICENSED
-- **Solidity Version**: ^0.8.9
+- SPDX-License-Identifier: UNLICENSED
+- Solidity Version: 0.8.9
 
-### Contract Functions
+### Contract Overview
 
-1. `getBalance()`: Returns the current balance of the contract.
-2. `deposit(uint256 _amount)`: Allows users to deposit Ether into the contract.
-3. `withdraw(uint256 _withdrawAmount)`: Allows users to withdraw Ether from the contract, handling insufficient balance with a custom error.
+The "Assessment" contract has the following main features:
 
-### Events
+1. **Constructor**: The constructor initializes the contract and sets the initial balance with the value passed as `initBalance` in the constructor parameter. The `msg.sender` becomes the contract owner, and the contract balance is set to `initBalance`.
 
-- `Deposit(uint256 amount)`: Emitted when Ether is deposited into the contract.
-- `Withdraw(uint256 amount)`: Emitted when Ether is withdrawn from the contract.
+2. **Public State Variables**:
+   - `owner`: An address payable variable that stores the address of the contract owner.
+   - `balance`: A uint256 variable that represents the current balance of the contract.
 
-## Getting Started
+3. **Events**:
+   - `Deposit`: This event is emitted when a user deposits funds into the contract. It includes the `amount` of funds deposited.
+   - `Withdraw`: This event is emitted when a user withdraws funds from the contract. It includes the `amount` of funds withdrawn.
 
-Follow these steps to set up and run the project on your local machine:
+4. **Functions**:
+   - `getBalance()`: A public view function that returns the current balance of the contract.
 
-1. Clone this GitHub repository to your computer.
-2. Navigate to the project directory in your terminal.
-3. Run the following command to install project dependencies:
-   ```sh
-   npm install
-   ```
-4. Open two additional terminals within your code editor.
+   - `deposit(uint256 _amount)`: A public payable function that allows users to deposit funds into the contract. The `_amount` parameter specifies the amount of funds to deposit. The function increases the contract balance by the deposited amount and emits the `Deposit` event.
 
-5. In the second terminal, start a local Ethereum development node using Hardhat:
-   ```sh
-   npx hardhat node
-   ```
+   - `withdraw(uint256 _withdrawAmount)`: A public function that allows users to withdraw funds from the contract. The `_withdrawAmount` parameter specifies the amount of funds to withdraw. If the user's account balance is sufficient for the withdrawal, the function reduces the contract balance by the withdrawal amount and emits the `Withdraw` event. If the user's account balance is insufficient, a custom error `InsufficientBalance` is reverted.
 
-6. In the third terminal, deploy the smart contract to the local network:
-   ```sh
-   npx hardhat run --network localhost scripts/deploy.js
-   ```
+### Custom Error
 
-7. Back in the first terminal, start the front-end development server:
-   ```sh
-   npm run dev
-   ```
+The contract defines a custom error named `InsufficientBalance`, which is used in the `withdraw` function to revert the transaction if the user's account balance is less than the withdrawal amount.
 
-8. Open your web browser and navigate to http://localhost:3000/ to interact with the front-end interface.
+### Important Notes
 
-## Project Structure
+- This is a basic example of a smart contract and is not intended for production use without proper testing and security considerations.
+- Ensure that appropriate security measures and access controls are implemented before deploying this contract on the Ethereum blockchain.
 
-- `contracts/Assessment.sol`: The Solidity smart contract code.
-- `scripts/deploy.js`: Script to deploy the smart contract.
-- `frontend/`: Contains the React front-end code.
-- `hardhat.config.js`: Hardhat configuration file.
-
-## License
-
-This code is provided under an UNLICENSED license, which means that there are no restrictions on its use, modification, or distribution.
-
-**Note**: This project is intended for educational purposes and is not suitable for production use without additional considerations and security measures.
-
-Feel free to explore, experiment, and learn from this code!
-```
-
-Please make sure to adjust the instructions and details according to your specific project setup and requirements.
+For more information on Solidity, please refer to the official Solidity documentation: https://docs.soliditylang.org/
